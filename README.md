@@ -1,216 +1,372 @@
-<h1 align="center"> recommandation movielens </h1>
-
-<p align="center"> An Intelligent, Multi-Model Hybrid Recommendation Engine for Personalized Cinema Exploration </p>
+<h1 align="center">🎬 MovieLens Recommandations IA</h1>
 
 <p align="center">
-  <img alt="Build" src="https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge">
-  <img alt="Issues" src="https://img.shields.io/badge/Issues-0%20Open-blue?style=for-the-badge">
-  <img alt="Contributions" src="https://img.shields.io/badge/Contributions-Welcome-orange?style=for-the-badge">
+  Moteur de recommandation de films hybride et intelligent basé sur le dataset MovieLens
+</p>
+
+<p align="center">
+  <img alt="Python" src="https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white">
+  <img alt="Flask" src="https://img.shields.io/badge/Flask-REST%20API-000000?style=for-the-badge&logo=flask&logoColor=white">
+  <img alt="React" src="https://img.shields.io/badge/React-Frontend-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+  <img alt="MongoDB" src="https://img.shields.io/badge/MongoDB-Database-47A248?style=for-the-badge&logo=mongodb&logoColor=white">
+  <img alt="Docker" src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white">
   <img alt="License" src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge">
 </p>
-<!-- 
-  **Note:** These are static placeholder badges. Replace them with your project's actual badges.
-  You can generate your own at https://shields.io
--->
-
-## 📑 Table of Contents
-- [Overview](#-overview)
-- [Key Features](#-key-features)
-- [Tech Stack & Architecture](#-tech-stack--architecture)
-- [Project Structure](#-project-structure)
-- [Environment Variables](#-environment-variables)
-- [API Keys Setup](#-api-keys-setup)
-- [Getting Started](#-getting-started)
-- [Usage](#-usage)
-- [Contributing](#-contributing)
-- [License](#-license)
 
 ---
 
-## 🌟 Overview
+## 📑 Table des Matières
 
-**recommandation movielens** is a sophisticated, full-stack predictive analytics platform designed to solve the "Paradox of Choice" in digital cinema. By leveraging the industry-standard MovieLens dataset, the system provides users with a seamless, highly personalized discovery interface that evolves based on individual preferences and community behavior.
-
-> In the modern era of streaming, users spend an average of 45 minutes simply searching for content to watch. Generic "Top 10" lists fail to capture individual nuances, leading to decision fatigue and decreased user engagement. Current recommendation systems often suffer from the "Cold Start" problem for new users and fail to provide transparent explanations for why a specific movie was suggested.
-
-The solution is a comprehensive **Hybrid Recommendation Engine** that merges collaborative filtering, content-based analysis, and K-Means clustering. This ensures that whether you are a first-time visitor or a long-term cinephile, the platform delivers accurate, context-aware suggestions. Built on a robust **Microservices Architecture** with a **React-driven Frontend** and a **Flask-powered REST API**, the system ensures high availability, scalability, and sub-second response times for complex recommendation calculations.
-
----
-
-## ✨ Key Features
-
-### 🧠 Advanced Hybrid Recommendation Engine
-- **Intelligent Personalization:** Utilizes `HybridRecommender` to combine item-to-item similarity and user-to-user collaborative filtering for pinpoint accuracy.
-- **New User Onboarding:** Employs Bayesian popularity calculations and K-Means clustering (`clustering.py`) to solve the cold-start problem, providing immediate value to first-time users.
-- **Content-Aware Discovery:** Analyzes movie metadata and genres to suggest films similar to those you already love.
-- **Explainable AI:** Generates human-readable explanations for recommendations, building trust and transparency with the user.
-
-### 🎬 Immersive User Experience
-- **Interactive Dashboard:** A centralized hub built with React that displays popular trends, personalized picks, and your viewing history.
-- **Dynamic Media Integration:** Features specialized components like `VideoPlayerTMDB` and `MovieCardWithVideo` for a rich, visual browsing experience.
-- **Real-time Search:** Instantly find films across the entire MovieLens database using high-performance search endpoints.
-- **Personalized Watchlists:** Manage your future viewing plans with a dedicated tracking system.
-
-### 🛡️ Secure & Scalable Backend
-- **Robust Authentication:** Secure user registration and login powered by JWT (JSON Web Tokens) and industry-standard password hashing.
-- **Automated Data Pipelines:** Includes `data_loader.py` and `load_movies.py` for seamless ingestion of large-scale movie datasets.
-- **System Health Monitoring:** Integrated health check endpoints ensure high reliability and easy maintenance in production environments.
-- **Admin Control Center:** Specialized scripts for database cleanup, offline computation triggers, and global statistics monitoring.
+- [Vue d'ensemble](#-vue-densemble)
+- [Fonctionnalités](#-fonctionnalités)
+- [Architecture & Stack Technique](#️-architecture--stack-technique)
+- [Structure du Projet](#-structure-du-projet)
+- [Prérequis](#-prérequis)
+- [Installation](#-installation)
+- [Configuration](#-configuration)
+- [Lancement](#-lancement)
+- [API Endpoints](#-api-endpoints)
+- [Dataset MovieLens](#-dataset-movielens)
+- [Déploiement](#-déploiement)
+- [Contribuer](#-contribuer)
+- [Licence](#-licence)
 
 ---
 
-## 🛠️ Tech Stack & Architecture
+## 🌟 Vue d'ensemble
 
-### Architecture Pattern
-The project follows a **Microservices-inspired architecture** with a clear separation between the **Recommender Engine (Offline Calculations)**, the **RESTful API Service (Online Service)**, and the **Component-based Frontend**.
+**MovieLens Recommandations IA** est une plateforme full-stack de recommandation cinématographique qui exploite le célèbre dataset **MovieLens**. Elle combine plusieurs algorithmes de machine learning pour fournir des suggestions personnalisées, précises et explicables à chaque utilisateur.
 
-| Layer | Technology | Purpose | Why it was Chosen |
-| :--- | :--- | :--- | :--- |
-| **Frontend** | React | User Interface | Component-based reusability and efficient DOM updates for dynamic movie grids. |
-| **Backend** | Flask | API & Logic | Lightweight and extensible, ideal for serving Machine Learning models via REST. |
-| **Styling** | Tailwind CSS | Visual Design | Rapid UI development with a utility-first approach for responsive layouts. |
-| **ML/Computation** | Python | Intelligence | Native support for advanced mathematical operations and data processing. |
-| **Database** | MongoDB | Data Persistence | Flexible document storage perfect for varied movie metadata and user preference profiles. |
-| **Containerization**| Docker | Deployment | Ensures environment parity between development and production. |
-| **Build Tool** | Vite | Frontend Tooling | Extremely fast hot-module replacement and optimized production builds. |
+> **Problème résolu** : Les utilisateurs de plateformes de streaming passent en moyenne 45 minutes à chercher quoi regarder. Ce système résout ce problème en proposant des recommandations contextuelles et personnalisées, même pour les nouveaux utilisateurs (Cold Start Problem).
+
+### Comment ça marche ?
+
+1. **Collecte des données** : Les notes et préférences des utilisateurs sont stockées en temps réel via l'API.
+2. **Calcul offline** : Un moteur hybride (filtrage collaboratif + similarité de contenu + clustering K-Means) génère des modèles de recommandation.
+3. **Recommandation online** : L'API Flask sert les résultats au frontend React en temps quasi-réel.
 
 ---
 
-## 📁 Project Structure
+## ✨ Fonctionnalités
+
+### 🧠 Moteur de Recommandation Hybride
+- **Filtrage Collaboratif** — Recommandations basées sur les utilisateurs similaires (`similarity.py`)
+- **Similarité Item-Item** — Films similaires à ceux déjà appréciés
+- **Clustering K-Means** — Groupes d'utilisateurs pour résoudre le Cold Start (`clustering.py`)
+- **Popularité Bayésienne** — Recommandations pertinentes pour les nouveaux utilisateurs
+- **IA Explicable** — Chaque recommandation est accompagnée d'une justification lisible
+
+### 🎬 Interface Utilisateur
+- **Dashboard interactif** — Films populaires, historique et recommandations personnalisées
+- **Intégration vidéo** — Composants `VideoPlayerTMDB` et `MovieCardWithVideo`
+- **Recherche temps réel** — Recherche instantanée dans toute la base MovieLens
+- **Watchlist personnalisée** — Système de suivi des films à voir
+
+### 🛡️ Backend Robuste
+- **Authentification JWT** — Inscription, connexion et gestion de sessions sécurisées
+- **25+ Endpoints RESTful** — API complète et documentée
+- **Monitoring & Healthcheck** — Vérification de l'état du système en temps réel
+- **Administration** — Endpoints dédiés pour la gestion de la base de données
+
+### 🐳 Déployable partout
+- Docker & Docker Compose configurés
+- Compatible Heroku, AWS, Azure, GCP
+- Support dev / test / production
+
+---
+
+## 🛠️ Architecture & Stack Technique
 
 ```
-fatimamellouki-Movies-IA-2dc0343/
-├── 📁 Backend/                 # Flask Backend Services
-│   ├── 📁 offline/             # ML Recommendation Core
-│   │   ├── 📄 recommender.py   # Hybrid engine logic
-│   │   ├── 📄 clustering.py    # K-Means user grouping
-│   │   └── 📄 similarity.py    # Item-item & User-user similarity
-│   ├── 📁 scripts/             # Admin & Initialization scripts
-│   │   ├── 📄 load_movies.py   # Data ingestion
-│   │   └── 📄 init_db.py       # Database bootstrapping
-│   ├── 📁 utils/               # Shared utilities
-│   │   ├── 📄 database.py      # MongoDB connection management
-│   │   ├── 📄 security.py      # JWT & Hashing logic
-│   │   └── 📄 validators.py    # Input data sanitization
-│   ├── 📄 app.py               # Main API Entry Point
-│   ├── 📄 config.py            # Environment configurations
-│   └── 📄 run.py               # Backend startup script
-├── 📁 Frontend/                # React Frontend Application
-│   ├── 📁 src/                 # Application source
-│   │   ├── 📁 components/      # UI Components (VideoPlayer, MovieCard)
-│   │   ├── 📁 pages/           # View Logic (Dashboard, Profile, Search)
-│   │   ├── 📁 api/             # Axios client configurations
-│   │   └── 📄 main.jsx         # Frontend entry point
-│   ├── 📄 vite.config.js       # Vite configuration
-│   └── 📄 tailwind.config.cjs  # Styling rules
-├── 📄 docker-compose.yml       # Orchestration for App & DB
-├── 📄 data_loader.py           # Dataset processing utility
-├── 📄 u.data                   # MovieLens Rating Data
-├── 📄 u.item                   # MovieLens Movie Metadata
-├── 📄 u.user                   # MovieLens User Metadata
-├── 📄 .env.example             # Configuration template
-└── 📄 README.md                # Project documentation
+┌─────────────────────────────────────────────────────┐
+│                     FRONTEND                        │
+│              React + Vite + Tailwind CSS             │
+└───────────────────────┬─────────────────────────────┘
+                        │ HTTP / REST
+┌───────────────────────▼─────────────────────────────┐
+│                  BACKEND (Flask)                    │
+│           REST API · JWT Auth · 25+ Routes           │
+└───────┬───────────────────────────┬─────────────────┘
+        │                           │
+┌───────▼────────┐         ┌────────▼────────┐
+│    MongoDB     │         │   ML Engine     │
+│  (Données &    │         │  (Offline)      │
+│  Préférences)  │         │  recommender.py │
+│                │         │  clustering.py  │
+│                │         │  similarity.py  │
+└────────────────┘         └─────────────────┘
+```
+
+| Couche | Technologie | Rôle |
+|:---|:---|:---|
+| **Frontend** | React + Vite | Interface utilisateur (SPA) |
+| **Styling** | Tailwind CSS | Design utilitaire et responsive |
+| **Backend** | Flask (Python) | API REST et orchestration ML |
+| **Machine Learning** | Python (scikit-learn) | Moteur de recommandation |
+| **Base de données** | MongoDB | Stockage des films, users, ratings |
+| **Auth** | JWT + bcrypt | Sécurité et gestion de sessions |
+| **Conteneurisation** | Docker + Compose | Déploiement portable |
+
+---
+
+## 📁 Structure du Projet
+
+```
+Movielens-Recommandations_IA/
+│
+├── 📁 Backend/                     # Service Flask
+│   ├── 📄 app.py                   # Point d'entrée principal (25+ routes)
+│   ├── 📄 config.py                # Configuration (dev/test/prod)
+│   ├── 📄 run.py                   # Script de démarrage
+│   ├── 📄 wsgi.py                  # Entrée WSGI pour production
+│   ├── 📄 healthcheck.py           # Vérification de santé
+│   ├── 📄 API_ROUTES.md            # Documentation des routes
+│   │
+│   ├── 📁 offline/                 # Moteur ML (calculs offline)
+│   │   ├── 📄 recommender.py       # 🧠 Moteur hybride principal
+│   │   ├── 📄 clustering.py        # K-Means (Cold Start)
+│   │   └── 📄 similarity.py        # Similarités item-item & user-user
+│   │
+│   ├── 📁 scripts/                 # Scripts d'administration
+│   │   ├── 📄 load_movies.py       # Ingestion du dataset MovieLens
+│   │   └── 📄 init_db.py           # Initialisation MongoDB
+│   │
+│   ├── 📁 utils/                   # Utilitaires partagés
+│   │   ├── 📄 database.py          # Connexion MongoDB
+│   │   ├── 📄 security.py          # JWT & hashing bcrypt
+│   │   └── 📄 validators.py        # Validation et sanitisation
+│   │
+│   └── 📁 tests/
+│       └── 📄 test_api.py          # Tests unitaires
+│
+├── 📁 Frontend/                    # Application React
+│   ├── 📁 src/
+│   │   ├── 📁 components/          # Composants réutilisables
+│   │   ├── 📁 pages/               # Pages (Dashboard, Profil, Recherche)
+│   │   └── 📁 api/                 # Client Axios
+│   ├── 📄 vite.config.js
+│   ├── 📄 tailwind.config.cjs
+│   └── 📄 package.json
+│
+├── 📄 u.data                       # Dataset MovieLens — Ratings (100k)
+├── 📄 u.item                       # Dataset MovieLens — Films
+├── 📄 u.user                       # Dataset MovieLens — Utilisateurs
+├── 📄 data_loader.py               # Chargeur de données utilitaire
+├── 📄 install.py                   # Installation automatique
+├── 📄 start.py                     # Menu de démarrage interactif
+├── 📄 check_requirements.py        # Vérification des prérequis
+├── 📄 docker-compose.yml           # Orchestration Docker
+├── 📄 Dockerfile                   # Image Docker Backend
+├── 📄 Procfile                     # Configuration Heroku
+└── 📄 .env.example                 # Template des variables d'environnement
 ```
 
 ---
 
-## 🔐 Environment Variables
+## ✅ Prérequis
 
-The application requires several environment variables to function correctly. These should be defined in a `.env` file in the root directory.
-
-| Variable | Description | Default/Example |
-| :--- | :--- | :--- |
-| `FLASK_APP` | Entry point for the Flask server | `Backend/app.py` |
-| `FLASK_ENV` | Development or Production mode | `development` |
-| `SECRET_KEY` | Key for session encryption | `your_secret_key_here` |
-| `JWT_SECRET_KEY`| Key for signing JWT tokens | `jwt_secret_token` |
-| `MONGO_URI` | Production MongoDB connection string | `mongodb://localhost:27017/movies` |
-| `MONGO_URI_DEV` | Development MongoDB string | `mongodb://localhost:27017/movies_dev` |
-| `FLASK_HOST` | Host for the API server | `0.0.0.0` |
-| `FLASK_PORT` | Port for the API server | `5000` |
-| `ADMIN_TOKEN` | Token for admin-only endpoints | `admin_super_secret` |
+| Outil | Version minimale |
+|:---|:---|
+| Python | 3.8+ |
+| Node.js | 16.x+ |
+| MongoDB | 4.4+ |
+| Docker *(optionnel)* | 20.x+ |
 
 ---
 
-## 🔑 API Keys Setup
+## 🚀 Installation
 
-### Database Integration
-1. **MongoDB Setup:** Ensure you have a MongoDB instance running locally or via a cloud provider like MongoDB Atlas.
-2. **Connection:** Update the `MONGO_URI` in your `.env` file to point to your instance.
-3. **Initialization:** Run the `Backend/scripts/init_db.py` script to create the necessary indexes and collections required for high-speed recommendation queries.
+### Option A — Installation automatique *(recommandée)*
 
----
+```bash
+# 1. Cloner le dépôt
+git clone https://github.com/votre-user/Movielens-Recommandations_IA.git
+cd Movielens-Recommandations_IA
 
-## 🚀 Getting Started
+# 2. Lancer l'installateur automatique
+python install.py
+```
 
-### Prerequisites
-- **Python:** 3.8 or higher
-- **Node.js:** 16.x or higher
-- **Docker:** (Optional) For containerized deployment
-- **MongoDB:** 4.4+ 
+### Option B — Installation manuelle
 
-### Installation Steps
+```bash
+# 1. Cloner le dépôt
+git clone https://github.com/votre-user/Movielens-Recommandations_IA.git
+cd Movielens-Recommandations_IA
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/fatimamellouki/Movies-IA.git
-   cd fatimamellouki-Movies-IA-2dc0343
-   ```
+# 2. Backend — Environnement virtuel Python
+python -m venv venv
+# Windows :
+venv\Scripts\activate
+# Linux/macOS :
+source venv/bin/activate
 
-2. **Backend Setup:**
-   ```bash
-   # Create and activate virtual environment
-   python -m venv venv
-   source venv/bin/activate # On Windows: venv\Scripts\activate
+pip install -r Backend/requirements.txt
 
-   # Install dependencies
-   pip install -r requirements.txt # Note: Use install.py for automated setup
-   python install.py
-   ```
+# 3. Frontend — Dépendances Node
+cd Frontend
+npm install
+cd ..
 
-3. **Frontend Setup:**
-   ```bash
-   cd Frontend
-   npm install
-   ```
+# 4. Ingestion du dataset MovieLens
+python Backend/scripts/load_movies.py
+python Backend/scripts/init_db.py
+```
 
-4. **Data Ingestion:**
-   ```bash
-   python Backend/scripts/load_movies.py
-   python Backend/scripts/init_db.py
-   ```
+### Option C — Docker
 
----
-
-## 🔧 Usage
-
-### Running the Application
-
-**Option A: Using Docker (Recommended)**
 ```bash
 docker-compose up --build
 ```
 
-**Option B: Manual Execution**
-1. **Start Backend:**
-   ```bash
-   python Backend/run.py
-   ```
-2. **Start Frontend:**
-   ```bash
-   cd Frontend
-   npm run dev
-   ```
+---
 
-### Core API Endpoints
+## 🔐 Configuration
 
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `POST` | `/api/register` | Create a new user account |
-| `POST` | `/api/login` | Authenticate and receive JWT |
-| `GET` | `/api/movies/popular` | Retrieve high-rated films (Anonymous access) |
-| `GET` | `/api/movies` | Get full movie listing (Authenticated) |
-| `GET` | `/api/health` | System status and database connectivity |
-| `POST` | `/api/rate_movie` | Submit a rating for a film |
-| `GET` | `/api/recommendations` | Fetch personalized hybrid recommendations |
+Copiez le fichier `.env.example` en `.env` et renseignez vos valeurs :
 
+```bash
+cp .env.example .env
+```
+
+| Variable | Description | Exemple |
+|:---|:---|:---|
+| `FLASK_ENV` | Environnement Flask | `development` |
+| `SECRET_KEY` | Clé de session Flask | `votre_clé_secrète` |
+| `JWT_SECRET_KEY` | Clé de signature JWT | `votre_jwt_secret` |
+| `MONGO_URI` | URI MongoDB production | `mongodb+srv://...` |
+| `MONGO_URI_DEV` | URI MongoDB développement | `mongodb://localhost:27017/movies_dev` |
+| `FLASK_PORT` | Port de l'API | `5000` |
+| `ADMIN_TOKEN` | Token admin protégé | `admin-secret-token` |
+| `RECOMMENDATION_N_CLUSTERS` | Nombre de clusters K-Means | `5` |
+| `REACT_APP_API_URL` | URL de l'API côté frontend | `http://localhost:5000` |
+
+---
+
+## ▶️ Lancement
+
+### Démarrage rapide (menu interactif)
+
+```bash
+python start.py
+```
+
+### Démarrage manuel
+
+```bash
+# Terminal 1 — Backend Flask
+python Backend/run.py
+
+# Terminal 2 — Frontend React
+cd Frontend
+npm run dev
+```
+
+### Vérification de santé
+
+```bash
+python check_requirements.py        # Vérifier les prérequis
+python Backend/healthcheck.py       # Vérifier l'état du système
+```
+
+L'application sera accessible à :
+- **Frontend** → http://localhost:5173
+- **API Backend** → http://localhost:5000
+- **Health Check** → http://localhost:5000/api/health
+
+---
+
+## 📡 API Endpoints
+
+| Méthode | Route | Auth | Description |
+|:---|:---|:---:|:---|
+| `POST` | `/api/register` | ❌ | Créer un compte utilisateur |
+| `POST` | `/api/login` | ❌ | Connexion (retourne un JWT) |
+| `GET` | `/api/health` | ❌ | État du système |
+| `GET` | `/api/movies/popular` | ❌ | Films populaires (accès public) |
+| `GET` | `/api/movies` | ✅ | Liste complète des films |
+| `POST` | `/api/rate_movie` | ✅ | Soumettre une note pour un film |
+| `GET` | `/api/recommendations` | ✅ | Recommandations personnalisées |
+
+> 📄 Voir [`Backend/API_ROUTES.md`](Backend/API_ROUTES.md) pour la documentation complète des routes.
+
+---
+
+## 📊 Dataset MovieLens
+
+Ce projet utilise le **MovieLens 100K Dataset** (GroupLens Research) :
+
+| Fichier | Contenu | Taille |
+|:---|:---|:---|
+| `u.data` | 100 000 notes (userId, movieId, rating, timestamp) | ~2 MB |
+| `u.item` | Métadonnées des 1 682 films (titre, genres, date) | ~236 KB |
+| `u.user` | Profils de 943 utilisateurs (âge, sexe, profession) | ~23 KB |
+
+---
+
+## 🐳 Déploiement
+
+### Docker Compose (recommandé)
+
+```bash
+docker-compose up -d
+# Initialiser la base :
+docker-compose exec backend python scripts/init_db.py
+```
+
+### Heroku
+
+```bash
+heroku create votre-app
+heroku config:set $(cat .env | xargs)
+git push heroku main
+```
+
+### Autres plateformes
+
+Le projet est compatible avec **AWS**, **Azure**, **GCP** et tout hébergeur supportant Docker.  
+Consultez [`DEPLOYMENT.md`](DEPLOYMENT.md) pour les guides détaillés par plateforme.
+
+---
+
+## 📚 Documentation
+
+| Document | Description |
+|:---|:---|
+| [`QUICKSTART.md`](QUICKSTART.md) | Démarrer en 5 minutes |
+| [`INSTALLATION.md`](INSTALLATION.md) | Installation détaillée & troubleshooting |
+| [`DEPLOYMENT.md`](DEPLOYMENT.md) | Déploiement sur Heroku, AWS, Azure, Docker |
+| [`Backend/API_ROUTES.md`](Backend/API_ROUTES.md) | Référence complète de l'API |
+| [`PROJECT_STATUS.md`](PROJECT_STATUS.md) | État et avancement du projet |
+
+---
+
+## 🤝 Contribuer
+
+Les contributions sont les bienvenues !
+
+```bash
+# 1. Forker le dépôt
+# 2. Créer une branche
+git checkout -b feature/ma-fonctionnalite
+
+# 3. Commiter vos changements
+git commit -m "feat: ajout de ma fonctionnalité"
+
+# 4. Pousser la branche
+git push origin feature/ma-fonctionnalite
+
+# 5. Ouvrir une Pull Request
+```
+
+---
+
+## 📄 Licence
+
+Ce projet est distribué sous licence **MIT**. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+---
+
+<p align="center">
+  Fait avec ❤️ — Projet ILIA · MovieLens Recommandations IA
+</p>
