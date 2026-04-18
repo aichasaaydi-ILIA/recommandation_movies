@@ -180,7 +180,7 @@ Movielens-Recommandations_IA/
 
 ```bash
 # 1. Cloner le dépôt
-git clone https://github.com/votre-user/Movielens-Recommandations_IA.git
+git clone  https://github.com/aichasaaydi-ILIA/recommandation_movies.git 
 cd Movielens-Recommandations_IA
 
 # 2. Lancer l'installateur automatique
@@ -191,7 +191,7 @@ python install.py
 
 ```bash
 # 1. Cloner le dépôt
-git clone https://github.com/votre-user/Movielens-Recommandations_IA.git
+git clone  https://github.com/aichasaaydi-ILIA/recommandation_movies.git 
 cd Movielens-Recommandations_IA
 
 # 2. Backend — Environnement virtuel Python
